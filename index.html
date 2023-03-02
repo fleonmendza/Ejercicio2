@@ -12,22 +12,50 @@
     <header>
       <nav>
         <h1>Poke Tienda</h1>
-        <button id="btnCarrito">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="30"
-            viewBox="0 96 960 960"
-            width="30"
-          >
-            <path
-              d="m480 482-42-42 74-74H330v-60h182l-74-74 42-42 146 146-146 146ZM289.788 976Q260 976 239 954.788q-21-21.213-21-51Q218 874 239.212 853q21.213-21 51-21Q320 832 341 853.212q21 21.213 21 51Q362 934 340.788 955q-21.213 21-51 21Zm404 0Q664 976 643 954.788q-21-21.213-21-51Q622 874 643.212 853q21.213-21 51-21Q724 832 745 853.212q21 21.213 21 51Q766 934 744.788 955q-21.213 21-51 21ZM62 236v-60h116l170 364h287.706L796 260h67L701 563q-11 19-28.559 30.5Q654.881 605 634 605H331l-56 104h491v60H284q-37.663 0-57.332-30Q207 709 224 678l64-118-148-324H62Z"
-            />
-          </svg>
-        </button>
+        
+        <div id="Compras">
+
+          <button id="btnCarrito">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="30"
+              viewBox="0 96 960 960"
+              width="30"
+            >
+              <path
+                d="m480 482-42-42 74-74H330v-60h182l-74-74 42-42 146 146-146 146ZM289.788 976Q260 976 239 954.788q-21-21.213-21-51Q218 874 239.212 853q21.213-21 51-21Q320 832 341 853.212q21 21.213 21 51Q362 934 340.788 955q-21.213 21-51 21Zm404 0Q664 976 643 954.788q-21-21.213-21-51Q622 874 643.212 853q21.213-21 51-21Q724 832 745 853.212q21 21.213 21 51Q766 934 744.788 955q-21.213 21-51 21ZM62 236v-60h116l170 364h287.706L796 260h67L701 563q-11 19-28.559 30.5Q654.881 605 634 605H331l-56 104h491v60H284q-37.663 0-57.332-30Q207 709 224 678l64-118-148-324H62Z"
+              />
+            </svg>
+          </button>
+
+          <div id="Carrito">
+            <div id="CarritoItem">
+              <img id="imgCarrito" src="https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800" alt="">
+              <span>Nombre Pokemon</span>
+              <span>cantidad</span>
+              <button class="botonesCarrito" id="btnDisminuirCantidad">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M200 606v-60h560v60H200Z"/></svg>
+              </button>
+              <button class="botonesCarrito" id="btnAumentarCantidad">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M453 776h60V610h167v-60H513V376h-60v174H280v60h173v166Zm27.266 200q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80 658.319 80 575.5q0-82.819 31.5-155.659Q143 347 197.5 293t127.341-85.5Q397.681 176 480.5 176q82.819 0 155.659 31.5Q709 239 763 293t85.5 127Q880 493 880 575.734q0 82.734-31.5 155.5T763 858.316q-54 54.316-127 86Q563 976 480.266 976Zm.234-60Q622 916 721 816.5t99-241Q820 434 721.188 335 622.375 236 480 236q-141 0-240.5 98.812Q140 433.625 140 576q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
+              </button>
+              <button class="botonesCarrito" id="btnEliminar">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M261 936q-24.75 0-42.375-17.625T201 876V306h-41v-60h188v-30h264v30h188v60h-41v570q0 24-18 42t-42 18H261Zm438-630H261v570h438V306ZM367 790h60V391h-60v399Zm166 0h60V391h-60v399ZM261 306v570-570Z"/></svg>
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+        
+        
       </nav>
     </header>
     <section>
-      <h2>Escoge un pokemon y agregalo al carrito</h2>
+      <h3>Escoge un pokemon y agregalo al carrito.</h3>
+      
+     
+
       <div id="cards">
 
 
