@@ -1,4 +1,5 @@
 body{
+    position: absolute;
     display: flex;
     flex-direction: column;
     background-color: black;
@@ -9,25 +10,21 @@ body{
 header{
     display: flex;
     background-color: #544fe7;
-    height: 10vh;
+    height: 20vh;
     width: 100%;
 }
 nav{
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 5px;
     width: 100%;
 }
-#Compras{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row-reverse;
-}
 section{
     background-color:#00ffff;
-    height: 90mvh;
+    height: 80mvh;
+    overflow-y: scroll;
 }
 h1{
     margin-left: 15px;
@@ -35,6 +32,8 @@ h1{
 h3{
     margin-left: 30px;
 }
+
+
 #btnCarrito{
     height: 35px;
     margin-right: 30px;
@@ -84,19 +83,30 @@ h3{
    
     background-color:  #6d961c;
     border-color: #547415;
-   
-
+}
+#Compras{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+    
 }
 #Carrito{
+    position: absolute;
+    top: 50px;
+    right: 20px;
     visibility: hidden;
     display: flex;
-    flex-direction: row-reverse;
+    overflow-y: scroll;
+    flex-direction: column;
     justify-content: flex-start;
-    width: 100%;
+    width: 500px;;
+    height: 500px;
+    background-color: #919e9e;
 
 }
 #CarritoItem{
-   
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -107,8 +117,8 @@ h3{
 #botonesCarrito{
     display: flex;
     width: 30px;
-
 }
+
 #imgCarrito{
     width: 80px;
 }
@@ -118,3 +128,4 @@ h3{
 .hidden{
     visibility: visible;
 }
+
