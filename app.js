@@ -10,37 +10,35 @@ let pokemonCarrito =[];
 
 const getInfoPokemon = async (url) => {
   let pokeInfo;
-  let id;
-  let name;
-  let types;
-  let height;
-  let weight;
-  let img;
-  let price;
  
   const response = await fetch(url);
   pokeInfo = await response.json();
-  name = pokeInfo.name;
-  id = pokeInfo.id
-  img = pokeInfo.sprites.front_default;
-  types = pokeInfo.types.map((poke) => (e = poke.type.name));
-  height = pokeInfo.height * 10;
-  weight = pokeInfo.weight / 10;
-  price = pokeInfo.stats[1].base_stat;
-  objetos = [...objetos, pokeInfo];
- 
+  
+  let pokeData = {
+    name : pokeInfo.name,
+    id : pokeInfo.id,
+    img :pokeInfo.sprites.front_default,
+    types : pokeInfo.types.map((poke) => (e = poke.type.name)),
+    height : pokeInfo.height * 10,
+    weight : pokeInfo.weight / 10,
+    price : pokeInfo.stats[1].base_stat,
+    cantidad: 1,
+  }
+  
+  objetos = [...objetos, pokeData];
+  // console.log(objetos);
   cards.innerHTML += `
        <div id="card">
-        <h2>${name.toUpperCase()}</h2>
+        <h2>${pokeData.name.toUpperCase()}</h2>
         <img
-            src="${img}"
-            alt="${name}"
+            src="${pokeData.img}"
+            alt="${pokeData.name}"
         />
-        <p><strong>Tipo:</strong> ${[...types].join(" / ")} </p>
-        <p><strong>Altura:</strong> ${height} cm </p>
-        <p><strong>Peso:</strong> ${weight} Kg</p>
-        <p><strong>Precio:</strong> ${price} $</p>
-        <button id="btnAgregarCarrito" onclick="addPokemonList(objetos, ${id});" class="btnAgregarCarrito" >Agregar al Carrito
+        <p><strong>Tipo:</strong> ${pokeData.types.join(" / ")} </p>
+        <p><strong>Altura:</strong> ${pokeData.height} cm </p>
+        <p><strong>Peso:</strong> ${pokeData.weight} Kg</p>
+        <p><strong>Precio:</strong> ${pokeData.price} $</p>
+        <button id="btnAgregarCarrito" onclick="addPokemonList(objetos, ${pokeData.id});" class="btnAgregarCarrito" >Agregar al Carrito
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="48"><path d="M453 776h60V610h167v-60H513V376h-60v174H280v60h173v166Zm27.266 200q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80 658.319 80 575.5q0-82.819 31.5-155.659Q143 347 197.5 293t127.341-85.5Q397.681 176 480.5 176q82.819 0 155.659 31.5Q709 239 763 293t85.5 127Q880 493 880 575.734q0 82.734-31.5 155.5T763 858.316q-54 54.316-127 86Q563 976 480.266 976Zm.234-60Q622 916 721 816.5t99-241Q820 434 721.188 335 622.375 236 480 236q-141 0-240.5 98.812Q140 433.625 140 576q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
         </button>
        </div>
@@ -61,31 +59,27 @@ const getApiPoke = async () => {
 };
 
 const addPokemonList = (data, id) =>{
-
+  // e.preventDefault()
+// console.log(data);
+// console.log(id);
 let pokemon = data.find((item)=>item.id===id);
+// console.log(pokemon);
 
-let pokeData = {
-  nombre: pokemon.name,
-  imagen: pokemon.sprites.front_default,
-  identificador: pokemon.id,
-  precio: pokemon.stats[1].base_stat,
-  cantidad: 1
-}
-
-if(pokemonCarrito.some((item)=>item.identificador === pokeData.identificador)){
-  pokeData.cantidad++;
+if(pokemonCarrito.some((item)=>item.id === pokemon.id)){
+  pokemon.cantidad++;
+  
 }else{
-  pokemonCarrito=[...pokemonCarrito,pokeData];
+  pokemonCarrito=[...pokemonCarrito, pokemon];
+
   Carrito.innerHTML += `
   <div id="CarritoItem" class="hidden">
     
-      <img id="imgCarrito" src="${pokeData.imagen}" alt="">
-      <div class="text"><span>${pokeData.nombre}</span> </div>
-      
-      <span>${pokeData.cantidad}</span>
-    
+      <img id="imgCarrito" src="${pokemon.img}" alt="">
+      <div class="text"><span>${pokemon.name}</span> </div>
+      <span>${pokemon.cantidad}</span>
+      <span>${pokemonCarrito.map((poke) => (e = poke.cantidad))}</span>
     <div>
-      <button class="botonesCarrito" id="btnDisminuirCantidad">
+      <button class="botonesCarrito" onclick="" id="btnDisminuirCantidad">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M200 606v-60h560v60H200Z"/></svg>
       </button>
       <button class="botonesCarrito" id="btnAumentarCantidad">
@@ -103,6 +97,7 @@ console.log(pokemonCarrito);
  
 };
 
+
 btnCarrito.addEventListener('click', (e)=>{ 
   if (carrito.style.display == 'flex') {
     carrito.style.display = 'none';
@@ -112,5 +107,7 @@ btnCarrito.addEventListener('click', (e)=>{
   }
 
 });   
+
+
 
 getApiPoke();

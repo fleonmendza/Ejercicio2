@@ -10,11 +10,10 @@ body{
 header{
     display: flex;
     background-color: #544fe7;
-    height: 20vh;
+    height: 20mvh;
     width: 100%;
 }
-nav{
-    
+header > nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,22 +93,18 @@ h3{
 }
 #Carrito{
     position: absolute;
-    top: 50px;
+    top: 59px;
     right: 20px;
-    visibility: hidden;
-    display: flex;
     overflow-y: scroll;
     flex-direction: column;
-    justify-content: flex-start;
-    width: 500px;;
-    height: 500px;
-    background-color: #919e9e;
-
+    width: 500px;
+    height: 300px;
+    display: none;
 }
 #CarritoItem{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-wrap: wrap;
     background-color: #6d961c;
     width: 100%;
@@ -128,4 +123,7 @@ h3{
 .hidden{
     visibility: visible;
 }
-
+.text{
+    width: 50px;
+    margin: 5px;
+}
