@@ -111,10 +111,10 @@ h3{
     background-color: #b0cf73;
     width: 100%;
 }
-#botonesCarrito{
+/* #botonesCarrito{
     display: flex;
     width: 30px;
-}
+} */
 
 #imgCarrito{
     width: 80px;
@@ -122,9 +122,9 @@ h3{
 #svg:hover{
     background-color:  #6d961c;
 }
-.hidden{
+/* .hidden{
     visibility: visible;
-}
+} */
 .text{
     width: 50px;
     margin: 5px;

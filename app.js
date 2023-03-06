@@ -1,9 +1,10 @@
 const cards = document.querySelector("#cards");
 const btnCarrito = document.querySelector("#btnCarrito");
-const btnAgregarCarrito = document.querySelector("#btnAgregarCarrito");
 const carrito = document.querySelector("#Carrito");
 const carritoItem = document.querySelector("#CarritoItem");
 const compras = document.querySelector("#Compras");
+const btnDisminuirCantidad = document.querySelector("#btnDisminuirCantidad");
+
 
 let objetos = [];
 let pokemonCarrito =[];
@@ -56,6 +57,8 @@ const getApiPoke = async () => {
   });
 };
 
+
+
 const addPokemonList = (data, id) =>{
     let pokemon = data.find((item)=>item.id===id);
 
@@ -64,13 +67,14 @@ const addPokemonList = (data, id) =>{
     }else{
       pokemonCarrito=[...pokemonCarrito, pokemon];
     }
+   
     printPokeItem(pokemonCarrito)
 
 };
 
 const printPokeItem = (data) =>{
   Carrito.innerHTML='';
-  data.forEach(e => {
+  data.map(e => {
     Carrito.innerHTML+=` 
     
     <div id="CarritoItem" class="hidden">   
@@ -80,14 +84,14 @@ const printPokeItem = (data) =>{
       </div>
         <span>${e.cantidad}</span>
       <div>
-        <button class="botonesCarrito" onclick="" id="btnDisminuirCantidad">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M200 606v-60h560v60H200Z"/></svg>
+        <button class="btnDisminuirCantidad" data-id='${e.id}'; id="btnDisminuirCantidad">
+        -
         </button>
-        <button class="botonesCarrito" id="btnAumentarCantidad">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M453 776h60V610h167v-60H513V376h-60v174H280v60h173v166Zm27.266 200q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80 658.319 80 575.5q0-82.819 31.5-155.659Q143 347 197.5 293t127.341-85.5Q397.681 176 480.5 176q82.819 0 155.659 31.5Q709 239 763 293t85.5 127Q880 493 880 575.734q0 82.734-31.5 155.5T763 858.316q-54 54.316-127 86Q563 976 480.266 976Zm.234-60Q622 916 721 816.5t99-241Q820 434 721.188 335 622.375 236 480 236q-141 0-240.5 98.812Q140 433.625 140 576q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
+        <button class="btnAumentarCantidad" data-id='${e.id}' id="btnAumentarCantidad">
+          +
         </button>
         <button class="botonesCarrito" id="btnEliminar">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M261 936q-24.75 0-42.375-17.625T201 876V306h-41v-60h188v-30h264v30h188v60h-41v570q0 24-18 42t-42 18H261Zm438-630H261v570h438V306ZM367 790h60V391h-60v399Zm166 0h60V391h-60v399ZM261 306v570-570Z"/></svg>
+         x
         </button>
       </div>
     </div>
@@ -95,6 +99,41 @@ const printPokeItem = (data) =>{
   });
   
 }
+
+
+const disQuantity = (id) =>{
+  pokemonCarrito.map((pokemon)=>{
+    if(pokemon.id == id){
+     pokemon.cantidad--;
+    }
+  })
+  printPokeItem(pokemonCarrito); 
+}
+
+const addQuantity = (id) =>{
+  pokemonCarrito.map((pokemon)=>{
+    if(pokemon.id == id){
+      pokemon.cantidad++;
+    }
+  })
+  printPokeItem(pokemonCarrito); 
+}
+
+
+document.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('btnDisminuirCantidad')){
+    let idbtn = e.target.dataset.id;
+    disQuantity(idbtn);
+  }
+});
+
+document.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('btnAumentarCantidad')){
+    let idbtn = e.target.dataset.id;
+    addQuantity(idbtn);
+  }
+ });
+
 
 btnCarrito.addEventListener('click', (e)=>{ 
   if (carrito.style.display == 'flex') {
@@ -107,7 +146,8 @@ btnCarrito.addEventListener('click', (e)=>{
 });
 
 
-
-
-
 getApiPoke();
+
+
+
+
