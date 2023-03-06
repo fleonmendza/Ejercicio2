@@ -5,7 +5,6 @@ const carritoItem = document.querySelector("#CarritoItem");
 const compras = document.querySelector("#Compras");
 const btnDisminuirCantidad = document.querySelector("#btnDisminuirCantidad");
 
-
 let objetos = [];
 let pokemonCarrito =[];
 
@@ -26,7 +25,6 @@ const getInfoPokemon = async (url) => {
     cantidad: 1,
   }
   objetos = [...objetos, pokeData];
-  
   cards.innerHTML += `
        <div id="card">
         <h2>${pokeData.name.toUpperCase()}</h2>
@@ -57,17 +55,13 @@ const getApiPoke = async () => {
   });
 };
 
-
-
 const addPokemonList = (data, id) =>{
     let pokemon = data.find((item)=>item.id===id);
-
     if(pokemonCarrito.some((item)=>item.id === pokemon.id)){
       pokemon.cantidad++;
     }else{
       pokemonCarrito=[...pokemonCarrito, pokemon];
     }
-   
     printPokeItem(pokemonCarrito)
 
 };
@@ -77,7 +71,8 @@ const printPokeItem = (data) =>{
   data.map(e => {
     Carrito.innerHTML+=` 
     
-    <div id="CarritoItem" class="hidden">   
+    <div id="CarritoItem" >   
+      
       <img id="imgCarrito" src="${e.img}" alt="">
       <div class="text">
         <span>${e.name}</span>
@@ -90,7 +85,7 @@ const printPokeItem = (data) =>{
         <button class="btnAumentarCantidad" data-id='${e.id}' id="btnAumentarCantidad">
           +
         </button>
-        <button class="botonesCarrito" id="btnEliminar">
+        <button class="btnEliminar" data-id='${e.id}' id="btnEliminar">
          x
         </button>
       </div>
@@ -100,11 +95,13 @@ const printPokeItem = (data) =>{
   
 }
 
-
 const disQuantity = (id) =>{
   pokemonCarrito.map((pokemon)=>{
     if(pokemon.id == id){
      pokemon.cantidad--;
+     if(pokemon.cantidad==0){
+      deleteItem(id);
+     }
     }
   })
   printPokeItem(pokemonCarrito); 
@@ -119,6 +116,16 @@ const addQuantity = (id) =>{
   printPokeItem(pokemonCarrito); 
 }
 
+const deleteItem = (id) =>{
+  pokemonCarrito.map((pokemon)=>{
+    if(pokemon.id == id){
+      let objetoPoke = pokemonCarrito.find((item)=>item.id==id);
+      let indiceItem = pokemonCarrito.indexOf(objetoPoke);
+      pokemonCarrito.splice(indiceItem, 1);
+    }
+  })
+  printPokeItem(pokemonCarrito); 
+}
 
 document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('btnDisminuirCantidad')){
@@ -134,6 +141,12 @@ document.addEventListener('click', (e)=>{
   }
  });
 
+ document.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('btnEliminar')){
+    let idbtn = e.target.dataset.id;
+    deleteItem(idbtn);
+  }
+ });
 
 btnCarrito.addEventListener('click', (e)=>{ 
   if (carrito.style.display == 'flex') {
