@@ -7,22 +7,22 @@ body{
     padding: 0px;
     font-family:Coronetscript, cursive;
 }
-header{
-    display: flex;
-    background-color: #544fe7;
-    height: 20mvh;
-    width: 100%;
-}
-header > nav{
+
+nav{
     display: flex;
     justify-content: space-between;
+    background-color: #544fe7;
     align-items: center;
     padding-bottom: 5px;
+    width: 100%;
+    position: fixed;
+    height: 20mvh;
     width: 100%;
 }
 section{
     background-color:#72d8d8;
     height: 80mvh;
+    margin-top: 78px;
     
 }
 h1{
@@ -31,7 +31,9 @@ h1{
 h3{
     margin-left: 30px;
 }
-
+#total{
+    margin-right: 20px;
+}
 
 #btnCarrito{
     height: 35px;
@@ -110,11 +112,8 @@ h3{
     flex-wrap: wrap;
     background-color: #b0cf73;
     width: 100%;
+    
 }
-/* #botonesCarrito{
-    display: flex;
-    width: 30px;
-} */
 
 #imgCarrito{
     width: 80px;
@@ -122,9 +121,7 @@ h3{
 #svg:hover{
     background-color:  #6d961c;
 }
-/* .hidden{
-    visibility: visible;
-} */
+
 .text{
     width: 50px;
     margin: 5px;

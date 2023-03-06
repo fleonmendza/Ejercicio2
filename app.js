@@ -4,6 +4,7 @@ const carrito = document.querySelector("#Carrito");
 const carritoItem = document.querySelector("#CarritoItem");
 const compras = document.querySelector("#Compras");
 const btnDisminuirCantidad = document.querySelector("#btnDisminuirCantidad");
+const total = document.querySelector('#total');
 
 let objetos = [];
 let pokemonCarrito =[];
@@ -63,6 +64,7 @@ const addPokemonList = (data, id) =>{
       pokemonCarrito=[...pokemonCarrito, pokemon];
     }
     printPokeItem(pokemonCarrito)
+    totalPrice();
 
 };
 
@@ -71,8 +73,8 @@ const printPokeItem = (data) =>{
   data.map(e => {
     Carrito.innerHTML+=` 
     
-    <div id="CarritoItem" >   
-      
+      <div id="CarritoItem" >   
+          
       <img id="imgCarrito" src="${e.img}" alt="">
       <div class="text">
         <span>${e.name}</span>
@@ -86,10 +88,10 @@ const printPokeItem = (data) =>{
           +
         </button>
         <button class="btnEliminar" data-id='${e.id}' id="btnEliminar">
-         x
+        x
         </button>
       </div>
-    </div>
+      </div>
 `
   });
   
@@ -105,6 +107,7 @@ const disQuantity = (id) =>{
     }
   })
   printPokeItem(pokemonCarrito); 
+  totalPrice();
 }
 
 const addQuantity = (id) =>{
@@ -113,7 +116,9 @@ const addQuantity = (id) =>{
       pokemon.cantidad++;
     }
   })
+  totalPrice();
   printPokeItem(pokemonCarrito); 
+  
 }
 
 const deleteItem = (id) =>{
@@ -124,13 +129,35 @@ const deleteItem = (id) =>{
       pokemonCarrito.splice(indiceItem, 1);
     }
   })
+
+  totalPrice();
   printPokeItem(pokemonCarrito); 
+ 
+}
+
+const totalPrice = () =>{
+  let precios = [];
+  let precioTotal;
+  precios = pokemonCarrito.map((pokemon)=> pokemon.price * pokemon.cantidad);
+
+  if(precios.length === 0){
+
+    precioTotal = 0;
+  }else{
+    
+
+    console.log(precios);
+    precioTotal = precios.reduce((x,y)=>x+y);
+    console.log(precioTotal);
+  }
+  total.textContent = `Total: $${precioTotal}`;
 }
 
 document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('btnDisminuirCantidad')){
     let idbtn = e.target.dataset.id;
     disQuantity(idbtn);
+    
   }
 });
 
@@ -138,6 +165,7 @@ document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('btnAumentarCantidad')){
     let idbtn = e.target.dataset.id;
     addQuantity(idbtn);
+
   }
  });
 
@@ -145,6 +173,7 @@ document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('btnEliminar')){
     let idbtn = e.target.dataset.id;
     deleteItem(idbtn);
+    
   }
  });
 
